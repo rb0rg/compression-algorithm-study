@@ -1,5 +1,6 @@
 mod cli;
 mod constants;
+mod core;
 
 fn main() -> anyhow::Result<()> {
     let cli = cli::build_cli();

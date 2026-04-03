@@ -1,8 +1,8 @@
-use std::path::PathBuf;
+use std::{collections::HashMap, fs, path::PathBuf};
 
 use clap::{Arg, ArgMatches, Command};
 
-use crate::constants;
+use crate::{constants, core};
 
 pub fn command() -> Command {
     Command::new("compress")
@@ -28,6 +28,11 @@ pub fn run(matches: &ArgMatches) -> anyhow::Result<()> {
     }
 
     println!("Compress file: {}", input.display());
+
+    let file_bytes: Vec<u8> = fs::read(input)?;
+
+    let _freq_map: HashMap<u8, usize> =
+        core::algorithm::huffman::generate_frequency_map(&file_bytes);
 
     Ok(())
 }
